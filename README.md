@@ -30,7 +30,7 @@ sudo tee ifrn.conf<<EOF
 	CustomLog${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 EOF
-# 5) Reiniciar o Apache
+
 sudo a2ensite ifrn.conf
 
 sudo echo “127.0.0.1		ifrn” | sudo tee -a /etc/hosts
@@ -38,8 +38,8 @@ sudo echo “127.0.0.1		ifrn” | sudo tee -a /etc/hosts
 sudo /etc/init.d/apache2 restart
 sudo /etc/init.d/apache2 status
 
-# 6) Aqui finalizamos toda a parte do script.
-# 7) Em seguida executamos o script e é finalizado o processo.
+# 5) Aqui finalizamos toda a parte do script após ter reiniciado o sistema.
+# 6) Em seguida executamos o script e é finalizado o processo.
 sudo chmod +x script.sh 
 ./script.sh
 
