@@ -1,4 +1,4 @@
-# 1) Primeiramente é necessário dar criar um arquivo, nomea-lo e logo após dar permissão para que ele possa ser ativido.
+# 1) Primeiramente é necessário dar criar um arquivo, nomea-lo e logo após dar permissão para que ele possa ser ativado.
 
 #! /bin/bash 
 # 2) A principío o script precisa saber que o Apache já está instalado na máquina, portanto deve ser criada uma "pergunta" para saber se é necessário ou não a instalação do Apache na máquina.
