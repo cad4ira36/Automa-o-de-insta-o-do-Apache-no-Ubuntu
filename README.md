@@ -1,8 +1,46 @@
-# site-simples-com-html-e-css
+# Primeiramente é necessário dar criar um arquivo, nomea-lo e logo após dar permissão para que ele possa ser ativido.
 
-Olá pra você que escolheu esse repositório! Nessa repositório você vai enconntrar um site bem simples feito com as tecnolgias html, css esse site(website) usando html e css foi feito apenas para praticar os estudos sobre programação front-end. Espero que gostes e também aproveita e vai dar uma passeada✌ lá no canal.
+#! /bin/bash 
+# A principío o script precisa saber que o Apache já está instalado na máquina, portanto deve ser criada uma "pergunta" para saber se é necessário ou não a instalação do Apache na máquina.
+if [ ! -x /etc/init.d/apache2 ]; then 
+echo “Apache não encontrado, iniciando a instalação…”
+sudo apt-get update
+sudo apt-get install apache2 -y
 
-## [🛠Assistir](https://www.youtube.com/watch?v=3R7QtNcwE3c)
-## [⚠Me Ajude](https://www.youtube.com/channel/UCxKIsX5OXyyNWVmomuDc-LA?sub_confirmation=1)
-# Preview
-![Como-Criar-um-SITE-Com-HTML-e-CSS-na-prática](/Como-Criar-um-SITE-Com-HTML-e-CSS-na-prática.png)
+else 
+echo “Você já possui o apache instalado”
+fi
+# Caso seja necesário a instalação do Apache na máquina, deve ser criado um arquivo onde vai estar inserido o instalador do Apache na máquina e onde ele será instalado.
+
+sudo mkdir -p /var/www/ifrn/public_html
+cd /var/www/ifrn/public_html 
+sudo git clone https://github.com/matheusmanuel/site-simples-com-html-e-css-.git
+sudo cp -r site-simples-com-html-e-css-/* .
+sudo rm -rf site-simples-com-html-e-css- /
+cd /etc/apache2/sites-available/
+sudo tee ifrn.conf<<EOF
+# Agora vamos escrever os script propriamente dito logo abaixo.
+<Virtualhost *:80>
+	ServerAdmin admim@ifrn
+
+	ServerName ifrn
+	ServerAlias www.ifrn
+	DocumentRoot /var/www/ifrn/public_html
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+EOF
+
+sudo a2ensite ifrn.conf
+
+sudo echo “127.0.0.1		ifrn” | sudo tee -a /etc/hosts
+
+sudo /etc/init.d/apache2 restart
+sudo /etc/init.d/apache2 status
+
+# Aqui finalizamos toda a parte do script.
+# Em seguida executamos o script e é finalizado o processo.
+sudo chmod +x script.sh 
+./script.sh
+
+
